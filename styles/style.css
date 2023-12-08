@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+:root {
+    --azul-1: hsl(243, 100%, 93%);
+    --azul-2: hsl(229, 7%, 55%);
+    --azul-3: hsl(228, 56%, 26%);
+    --azul-4: hsl(229, 57%, 11%);
+
+    --spacer-1: 25px;
+    --spacer-2: 35px;
+
+    --radius-1: 12px;
+
+    --gauge-height: 24px;
+    --gauge-padding: 4px;
+    --gauge-progress: 70%;
+}
+
+.shadow-on-hover {
+    transition: box-shadow 0.3s linear;
+}
+
+.shadow-on-hover:hover {
+    box-shadow: 1px 33px 52px 0px rgba(0, 0, 0, 0.21);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+strong {
+    font-weight: 700;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--azul-4);
+    background-image: url('../images/bg-desktop.png');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    display: flex;
+    gap: var(--spacer-1);
+    align-items: bottom;
+    width: 1144px;
+    height: auto;
+
+    transform: translateY(-50px);
+}
+
+.panel {
+    flex-basis: 30%;
+    flex-shrink: 1;
+
+    padding: var(--spacer-2);
+    background: var(--azul-3);
+    border-radius: var(--radius-1);
+    border-top-right-radius: 90px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-1);
+}
+
+.panel__menu {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.panel__menu--link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--azul-4);
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.panel__menu--link-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 25px;
+    width: 25px;
+}
+
+.panel__menu--link-img img {
+    object-fit: contain;
+    width: 100%;
+    max-height: 100%;
+}
+
+.storage {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    flex-basis: 70%;
+    flex-shrink: 1;
+}
+
+.storage__usage {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: var(--spacer-2);
+    background-color: var(--azul-3);
+    border-radius: var(--radius-1);
+}
+
+.storage__usage--title {
+    font-weight: 400;
+    font-size: 1rem;
+    color: white;
+}
+
+.storage__usage--content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.storage__usage--gauge {
+    width: 100%;
+    height: var(--gauge-height);
+    background-color: var(--azul-4);
+    border-radius: 9999px;
+    position: relative;
+}
+
+.storage__usage--gauge::before {
+    content: '';
+    position: absolute;
+
+    top: 4px;
+    left: 4px;
+    width: var(--gauge-progress);
+    height: calc(100% - 8px);
+    background-image: linear-gradient(
+        90deg,
+        hsl(6, 100%, 80%) 0%,
+        hsl(335, 100%, 65%)
+    );
+    border-radius: 9999px;
+    transition: width 0.3s ease-in-out;
+}
+
+.storage__usage--gauge::after {
+    --circle-padding: calc(var(--gauge-padding) * 2);
+    --circle-radius: calc(
+        var(--gauge-height) - calc(var(--circle-padding) * 2)
+    );
+
+    position: absolute;
+    content: '';
+    height: var(--circle-radius);
+    width: var(--circle-radius);
+    background-color: white;
+    top: var(--circle-padding);
+    left: calc(var(--gauge-progress) - var(--circle-radius));
+    border-radius: 50%;
+    transition: left 0.3s ease-in-out;
+}
+
+.storage__usage--legend {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    color: white;
+}
+
+.storage__usage--remaining {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: absolute;
+    right: var(--spacer-2);
+    top: -25px;
+
+    color: var(--azul-2);
+    font-size: 0.8rem;
+
+    padding: 20px;
+    background-color: white;
+    border-radius: var(--radius-1);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.storage__usage--remaining::after {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    content: '';
+    background-color: transparent;
+    border-width: 20px;
+    border-style: solid;
+    border-right-color: white;
+
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+
+.storage__usage--remaining strong {
+    font-size: 2rem;
+    color: var(--azul-4);
+}
